@@ -6,7 +6,10 @@ import { catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
-  
+  headers: new HttpHeaders({
+    'x-rapidapi-key': '3bf97c15d1msh507caa13ebf8301p117843jsn0853d1f62bd6',
+    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+  })
 }
 
 @Injectable({
