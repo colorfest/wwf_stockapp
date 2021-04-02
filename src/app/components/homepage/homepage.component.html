@@ -1,0 +1,35 @@
+<h1>Data</h1>
+
+<button (click)="fetchData()">Fetch Data </button>
+
+<hr>
+
+<!-- <li *ngFor="let data of data$ | async">{{ data }}</li> -->
+<div *ngIf="config != undefined">
+    {{ config.quoteType.symbol }}
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-dark table-hover table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Fractional Shares</th>
+                <th scope="col">Average Cost</th>
+                <th scope="col">Cost Basis</th>
+                <th scope="col">Market Value</th>
+                <th scope="col">Gain/Loss</th>
+                <th scope="col">Growth</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{{ config.quoteType.symbol }}</th>
+                <td><input type="number" value={{this.inputItem}} placeholder={{this.inputItem}} /></td>
+                <td><input type="number" /></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
