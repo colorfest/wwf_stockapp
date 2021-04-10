@@ -10,12 +10,14 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { DefaultService } from './services/default.service';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddStockComponent } from './components/add-stock/add-stock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddStockComponent
   ],
   imports: [
     BrowserModule,

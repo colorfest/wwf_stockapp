@@ -20,11 +20,13 @@ export class DefaultService {
 
   configUrl = '../../assets/testdata.json';
   
-  dataUrl: string = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=PSEC&region=US';
-  //'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v3/get-historical-data?symbol=glo&region=US';
+  dataUrl: string = '';
+  // 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=PSEC&region=US';
+  // 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v3/get-historical-data?symbol=glo&region=US';
 
 
-  getData() {
+  getData(tickerSymbol) {
+    this.dataUrl = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=${tickerSymbol}&region=US`;
     return this.http.get<DefaultData>(this.dataUrl, { headers: httpOptions.headers});
   }
 }

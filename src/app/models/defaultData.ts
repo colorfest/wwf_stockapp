@@ -1,12 +1,3 @@
-// export interface DefaultData {
-//     prices: Object;
-//     isPending: boolean;
-//     firstTradeDate: number;
-//     id: string;
-//     timeZone: any;
-//     eventsData: Object;
-// }
-
 export interface DefaultData {
     financialsTemplate: [];
     price: [];
