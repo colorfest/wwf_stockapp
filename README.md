@@ -13,6 +13,7 @@ If a stock is added or delete, or if it has been 24 hours since the last data up
 <ul>
     <li><strong>wwfStockData</strong> - Stocks saved by the user. Information included is ticker symbol, fractional shares owned, and averge price paid.</li>
     <li><strong>wwfAPIData</strong> - Using wwfStockData, wwfAPIData is retrieve from Yahoo Finance and combined into one json set to display for the user.</li>
+    <li><strong>wwfSavedData</strong> - The combined user and api data to display in the view.</li>
     <li><strong>wwfUpdateDate</strong> - The date timestamp of the last time data was updated.</li>
 </ul>
 
