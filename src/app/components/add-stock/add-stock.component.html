@@ -1,8 +1,29 @@
-<div>
+<!-- <div>
     <form>
         <input type="text" name="symbol" placeholder="Stock symbol" />
         <input type="string" name="shares" placeholder="Enter shares" />
         <input type="number" name="averageCost" placeholder="Average Cost" />
         <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div> -->
+
+<div class="container">
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="col-3">
+                <input type="text" class="form-control uppercase" formControlName="tickerSymbol" placeholder="Stock symbol">
+            </div>
+            <div class="col-3">
+                <input type="text" class="form-control uppercase" formControlName="fractionalShares" placeholder="Enter shares">
+            </div>
+            <div class="col-3">
+                <input type="text" class="form-control uppercase" formControlName="averageCost" placeholder="Average Cost">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary mb-2" type="submit">
+                    Add Stock
+                </button>
+            </div>
+        </div>
     </form>
 </div>

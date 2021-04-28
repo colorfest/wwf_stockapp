@@ -17,13 +17,8 @@ const httpOptions = {
 })
 export class DefaultService {
   constructor(private http: HttpClient) { }
-
-  configUrl = '../../assets/testdata.json';
   
   dataUrl: string = '';
-  // 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=PSEC&region=US';
-  // 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v3/get-historical-data?symbol=glo&region=US';
-
 
   getData(tickerSymbol) {
     this.dataUrl = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=${tickerSymbol}&region=US`;

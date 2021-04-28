@@ -1,6 +1,20 @@
 # Wwfstockapp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
+A web-based app for tracking individual or retail investor stock information. Focus is on dividends, growth, and charting portfolio diversity.
+
+## Key Local Storage
+The app will utilize LocalStorage to populate data as needed. One goal of the project is to minimize API calls when not necessary.
+
+For instance, if a user is simply changing the number of shares owned, there is no need to refresh the entire data set with an API call. All that is required are calculations for the new information entered.
+
+If a stock is added or delete, or if it has been 24 hours since the last data update, the app will call the api to retreive the latest data available from the API.
+
+### Local Storage Definitions
+<ul>
+    <li><strong>wwfStockData</strong> - Stocks saved by the user. Information included is ticker symbol, fractional shares owned, and averge price paid.</li>
+    <li><strong>wwfAPIData</strong> - Using wwfStockData, wwfAPIData is retrieve from Yahoo Finance and combined into one json set to display for the user.</li>
+    <li><strong>wwfUpdateDate</strong> - The date timestamp of the last time data was updated.</li>
+</ul>
 
 ## Development server
 

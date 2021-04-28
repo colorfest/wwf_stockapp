@@ -11,21 +11,35 @@ import { DefaultService } from './services/default.service';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddStockComponent } from './components/add-stock/add-stock.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TopNavComponent } from './components/top-nav/top-nav.component';
+import { AddStockService } from './services/add-stock.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms/';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     PageNotFoundComponent,
-    AddStockComponent
+    AddStockComponent,
+    TopNavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatButtonModule,
+    MatInputModule, 
+    MatIconModule
   ],
-  providers: [DefaultService],
+  providers: [DefaultService, AddStockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

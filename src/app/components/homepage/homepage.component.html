@@ -1,58 +1,80 @@
-<h1>Data</h1>
-
-<button (click)="fetchData()">Fetch Data </button>
-<button routerLink="/add-stock">Add Stock</button>
-
-<hr>
-
 <!-- <li *ngFor="let data of data$ | async">{{ data }}</li> -->
 <!-- <div *ngIf="config != undefined">
     {{ config.quoteType.symbol }}
 </div> -->
 
+<button (click)="fetchData()" class="btn btn-primary">Fetch Data </button>
+
 <div class="table-responsive">
     <table class="table table-striped table-dark table-hover table-sm">
         <thead>
             <tr>
-                <th scope="col">Symbol</th>
+                <th></th>
+                <th scope="col" class="symbols">Symbol</th>
                 <th scope="col">Exchange</th>
                 <th scope="col">Fractional <br/>Shares</th>
                 <th scope="col">Average Cost</th>
                 <th scope="col">Cost Basis</th>
-                <th scope="col">Market Value</th>
+                <th scope="col">Market <br />Value</th>
+                <th scope="col">Market <br />Price</th>
                 <th scope="col">Gain/Loss</th>
                 <th scope="col">Growth</th>
                 <th scope="col">Name</th>
                 <th scope="col">Currency</th>
                 <th scope="col">Sector</th>
-                <th scope="col">Market Price</th>
                 <th scope="col">Annual <br>Dividend</th>
-                <th scope="col">EX / EFF Dividend</th>
+                <th scope="col">EX / EFF <br />Dividend</th>
                 <th scope="col">Payment Date</th>
                 <th scope="col">Dividend <br />Yield</th>
                 <th scope="col">Yield on <br />Cost</th>
                 <th scope="col">Annual <br />Income</th>
             </tr>
+            <tr class="totals">
+                <td></td>
+                <td scope="col" class="symbols"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+            </tr>
         </thead>
         <tbody *ngIf="displayData != undefined">
             <tr *ngFor="let data of displayData">
+                <td class="deleteColumn">
+                    <button mat-button aria-label="Delete" (click)="deleteStock(data[0])">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+                    </button>
+                </td>
                 <th scope="row" class="symbols">{{ data[0].tickerSymbol }}</th>
                 <td class="left">{{ data[1].price.exchangeName }}</td>
                 <td>{{ data[0].fractionalShares }}</td>
                 <td>{{ data[0].averageCost | currency}}</td>
                 <td>{{ data[0].fractionalShares * data[0].averageCost | currency}}</td>
                 <td>{{ data[1].price.regularMarketPrice.raw *  data[0].fractionalShares | currency }}</td>
+                <td>{{ data[1].price.regularMarketPrice.raw | currency }}</td>
                 <td>{{ (data[1].price.regularMarketPrice.raw *  data[0].fractionalShares) - (data[0].fractionalShares * data[0].averageCost)| currency }}</td>
-                <td>{{ (((data[1].price.regularMarketPrice.raw *  data[0].fractionalShares) - (data[0].fractionalShares * data[0].averageCost)) / (data[0].fractionalShares * data[0].averageCost)) * 100 | number : '1.0-2'}} %</td>
+                <td>{{ data[0].averageCost == '0.00' ? (0 | number : '1.0-2') : ( (((data[1].price.regularMarketPrice.raw *  data[0].fractionalShares) - (data[0].fractionalShares * data[0].averageCost)) / (data[0].fractionalShares * data[0].averageCost)) * 100 | number : '1.0-2') }} %</td>
                 <td class="left">{{ data[1].quoteType.longName }}</td>
                 <td>{{ data[1].price.currency}}</td>
                 <td>{{ data[1].assetProfile.sector }}</td>
-                <td>{{ data[1].price.regularMarketPrice.raw | currency }}</td>
-                <td>{{ data[1].summaryDetail.trailingAnnualDividendRate.raw | currency}}</td>
-                <td>{{ data[1].calendarEvents.exDividendDate.fmt | date: 'MMMM d, y'}}</td>
-                <td>{{ data[1].calendarEvents.dividendDate.fmt | date: 'MMMM d, y' }}</td>
+                <td>{{ data[1].summaryDetail.trailingAnnualDividendRate.raw  == '' ? '' : data[1].summaryDetail.trailingAnnualDividendRate.raw | currency}}</td>
+                <td class="left">{{ data[1].calendarEvents.exDividendDate.fmt | date: 'MMMM d, y'}}</td>
+                <td class="left">{{ data[1].calendarEvents.dividendDate.fmt | date: 'MMMM d, y' }}</td>
                 <td>{{ data[1].summaryDetail.dividendYield.fmt }}</td>
-                <td>{{ (data[1].summaryDetail.trailingAnnualDividendRate.raw / data[0].averageCost) * 100 | number: '1.0-2' }} %</td>
+                <td>{{ data[0].averageCost == '0.00' ? 0 : ((data[1].summaryDetail.trailingAnnualDividendRate.raw / data[0].averageCost) | percent : '1.0-2') }}</td>
                 <td>{{ data[1].summaryDetail.trailingAnnualDividendRate.raw * data[0].fractionalShares | currency }}</td>
             </tr>
         </tbody>

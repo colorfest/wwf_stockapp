@@ -6,6 +6,13 @@ table {
         text-transform: uppercase;
         padding: 0.7em 0.25em;
         vertical-align: middle;
+        border: none;
+    }
+
+    tr {
+        &.totals {
+            background: #232323;
+        }
     }
 
     th {
@@ -19,9 +26,18 @@ table {
         font-weight: normal;
         letter-spacing: 0em;
         text-transform: capitalize;
+        padding-left: 0.75em;
         &.left {
             text-align: left;
-
+        }
+        &.deleteColumn {
+            text-align: center;
+            padding: 2px;
+            width: 10px;
+            background: black;
+        }
+        &.symbols {
+            background: #2436aa;
         }
     }
 }
