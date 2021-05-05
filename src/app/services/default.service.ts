@@ -19,8 +19,9 @@ export class DefaultService {
   constructor(private http: HttpClient) { }
   
   dataUrl: string = '';
-
+  
   getData(tickerSymbol) {
+    console.warn('calling to API');
     this.dataUrl = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile?symbol=${tickerSymbol}&region=US`;
     return this.http.get<DefaultData>(this.dataUrl, { headers: httpOptions.headers});
   }

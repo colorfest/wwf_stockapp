@@ -9,21 +9,32 @@
 
 <div class="container">
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-        <div class="form-row">
+        <div class="form-row form-group">
             <div class="col-3">
                 <input type="text" class="form-control uppercase" formControlName="tickerSymbol" placeholder="Stock symbol">
             </div>
             <div class="col-3">
-                <input type="text" class="form-control uppercase" formControlName="fractionalShares" placeholder="Enter shares">
+                <input type="text" class="form-control uppercase" formControlName="fractionalShares" 
+                placeholder="Enter shares">
             </div>
             <div class="col-3">
                 <input type="text" class="form-control uppercase" formControlName="averageCost" placeholder="Average Cost">
             </div>
             <div class="col-auto">
-                <button class="btn btn-primary mb-2" type="submit">
+                <button class="btn btn-primary mb-2" type="submit"
+                [disabled]="!checkoutForm.valid">
                     Add Stock
                 </button>
             </div>
+        </div>
+
+        <div class="formResultContainer" *ngIf="!checkoutForm.valid">
+            <h3>An Error Occurred</h3>
+            <p>Please enter in a valid stock symbol, fraction shares, and currency value.</p>
+        </div>
+
+        <div class="formResultContainer" *ngIf="message">
+            <h3>{{ message }}</h3>
         </div>
     </form>
 </div>

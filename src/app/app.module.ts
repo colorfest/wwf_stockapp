@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from "@angular/common/http";
+import { CurrencyPipe} from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms/';
 import {MatIconModule} from '@angular/material/icon';
+import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
+
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import {MatIconModule} from '@angular/material/icon';
     HomepageComponent,
     PageNotFoundComponent,
     AddStockComponent,
-    TopNavComponent
+    TopNavComponent,
+    ModalAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +42,10 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     MatButtonModule,
     MatInputModule, 
-    MatIconModule
+    MatIconModule,
+    RxReactiveFormsModule
   ],
-  providers: [DefaultService, AddStockService],
+  providers: [DefaultService, AddStockService, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
