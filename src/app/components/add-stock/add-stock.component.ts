@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { AppComponent } from 'src/app/app.component';
@@ -10,6 +10,8 @@ import { AddStockService } from '../../services/add-stock.service';
   styleUrls: ['./add-stock.component.scss']
 })
 export class AddStockComponent implements OnInit {
+  @ViewChild('tickerSymbol') tickerSymbolInput: ElementRef;
+
   checkoutForm: FormGroup;
   formattedAmount;
   amount;
@@ -32,6 +34,8 @@ export class AddStockComponent implements OnInit {
       console.warn(`Your stock has been submitted.`, this.checkoutForm.value);
 
       this.checkoutForm.reset();
+
+      this.tickerSymbolInput.nativeElement.focus();
     }
 
 

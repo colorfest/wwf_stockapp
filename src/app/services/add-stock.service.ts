@@ -75,11 +75,8 @@ export class AddStockService {
     this.currentPortfolioAsString = `[${this.currentPortfolioAsString}]`;
     console.log(this.currentPortfolioAsString);
 
-    // set new wwfStockData local storage
-    localStorage.setItem('wwfStockData', this.currentPortfolioAsString);
-
+    // if we get data, update user local stock set
     this.updatePortfolio();
-
   }
 
   updatePortfolio () {
@@ -89,6 +86,12 @@ export class AddStockService {
     this.data$ = this.getStocks(this.stocks[0].tickerSymbol)
     .subscribe(data => {
       this.config = <DefaultData>data;
+
+      // check for error
+      if (this.config == null) {
+        alert('error! this is not a stock');
+        return false;
+      }
       
       // strinigfy data to be combined
       var externalData = JSON.stringify(this.config);
@@ -130,6 +133,8 @@ export class AddStockService {
         lastData = `[${this.fullData}]`;
         localStorage.setItem("wwfSavedData", lastData);
       }
+      
+      localStorage.setItem('wwfStockData', this.currentPortfolioAsString);
      },
     error => this.error = error);
   }

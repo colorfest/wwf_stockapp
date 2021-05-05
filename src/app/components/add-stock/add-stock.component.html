@@ -11,7 +11,7 @@
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
         <div class="form-row form-group">
             <div class="col-3">
-                <input type="text" class="form-control uppercase" formControlName="tickerSymbol" placeholder="Stock symbol">
+                <input type="text" class="form-control uppercase" #tickerSymbol formControlName="tickerSymbol" placeholder="Stock symbol">
             </div>
             <div class="col-3">
                 <input type="text" class="form-control uppercase" formControlName="fractionalShares" 
