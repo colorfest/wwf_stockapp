@@ -64,7 +64,7 @@ export class HomepageComponent implements OnInit {
     
         // get wwfStockData as JSON
         this.userStockData = this.getUserData("stockList");
-        console.log(this.userStockData);
+        this.userStockData = JSON.parse(this.userStockData);
 
         // parse through each stock and get API data
         if (this.userStockData) {
@@ -80,7 +80,7 @@ export class HomepageComponent implements OnInit {
           
                     // combine
                     var fullData = `[${userData}, ${externalData}]`;
-                    console.log(fullData);debugger;
+                    console.log(fullData);
           
                     // push to displayData
                     this.displayData.push(JSON.parse(fullData));
