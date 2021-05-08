@@ -46,3 +46,13 @@ h5 {
     color: red;
     font-size: 2em;
 }
+
+input {
+    &.portfolioNumberInput {
+        background: #232323;
+        color: #ffffff;
+        border: none;
+        text-align: center;
+        padding: 0.25em;
+    }
+}

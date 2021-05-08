@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DefaultService } from '../../services/default.service';
 import { DefaultData } from '../../models/defaultData';
 import { DeleteStockService } from '../../services/delete-stock.service';
+import { ColumnTotalsService } from '../../services/column-totals.service';
 import { AppComponent} from '../../app.component';
 
 @Component({
@@ -20,8 +21,17 @@ export class HomepageComponent implements OnInit {
   userStockData: any;
   displayData:any;
   showAlert: boolean = false;
+  costBasisTotal: number;
+  marketValueTotal: number;
+  gainLossTotal: number;
+  totalGrowth: number;
+  totalDividendYield: number;
+  totalYieldOnCost: number;
+  annualIncome: number;
 
-  constructor(private defaultService: DefaultService, public appComponent: AppComponent,
+  constructor(private defaultService: DefaultService, 
+    public appComponent: AppComponent, 
+    private columnTotalsService: ColumnTotalsService,
     private deleteStockService: DeleteStockService) { }
 
     /**
@@ -36,19 +46,16 @@ export class HomepageComponent implements OnInit {
         this.savedUserData = this.getUserData("portfolio");
         this.savedUserData = JSON.parse(`${this.savedUserData}`);
 
-        console.log('current data');
-        console.log(this.savedUserData);
-
         // sort alphabetically
-        console.log('saved user data length');
-        console.log(Object.keys(this.savedUserData[0]).length);
         if ( Object.keys(this.savedUserData).length > 2) {
             this.sortData("ascending", "symbol");
         } 
 
         // set displayData to current savedUserData
         this.displayData = this.savedUserData;
-        console.log(this.displayData);
+
+        // get column totals
+        this.getColumnTotals(null);
     }
 
     /**
@@ -170,6 +177,34 @@ export class HomepageComponent implements OnInit {
 
     openModal () {
         this.showAlert = true;
+    }
+
+    /**
+     * Get the totals for each column
+     * @param type - You can get all or specific columns to set totals for
+     */
+    getColumnTotals(type: string) {
+        // set switch statement for different total types
+        switch (type) {
+
+            case "fractionalShares":
+                this.costBasisTotal = this.columnTotalsService.getCostBasisTotal();
+                console.log(`Cost Basis total: ${this.costBasisTotal}`);
+                break;
+
+            case "averageCost":
+                break;
+
+            default:
+                this.costBasisTotal = this.columnTotalsService.getCostBasisTotal();
+                this.marketValueTotal = this.columnTotalsService.getMarketValueTotal();
+                this.gainLossTotal = this.columnTotalsService.getGainLossTotal();
+                this.totalGrowth = this.columnTotalsService.getTotalGrowth();
+                this.totalDividendYield = this.columnTotalsService.getTotalDividendYield();
+                this.totalYieldOnCost = this.columnTotalsService.getTotalYieldOnCost();
+                this.annualIncome = this.columnTotalsService.getAnnualIncome();
+                break;
+        }
     }
 
   ngOnInit(): void {

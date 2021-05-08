@@ -21,9 +21,6 @@ export class DeleteStockService {
    * @param stock 
    */
   deleteFromPortfolio (stock: any) {
-    console.log('delete stock');
-    console.log(stock);
-
     this.stocks.push(stock);
 
     //remove it

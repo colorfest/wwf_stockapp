@@ -35,20 +35,20 @@
                 <td scope="col"></td>
                 <td scope="col"></td>
                 <td scope="col"></td>
+                <td scope="col" class="columnTotals">{{ costBasisTotal | currency }}</td>
+                <td scope="col" class="columnTotals">{{ marketValueTotal | currency }}</td>
+                <td scope="col"></td>
+                <td scope="col" class="columnTotals">{{ gainLossTotal | currency }}</td>
+                <td scope="col" class="columnTotals">{{ totalGrowth | number : '1.0-2' }}%</td>
                 <td scope="col"></td>
                 <td scope="col"></td>
                 <td scope="col"></td>
                 <td scope="col"></td>
                 <td scope="col"></td>
                 <td scope="col"></td>
-                <td scope="col"></td>
-                <td scope="col"></td>
-                <td scope="col"></td>
-                <td scope="col"></td>
-                <td scope="col"></td>
-                <td scope="col"></td>
-                <td scope="col"></td>
-                <td scope="col"></td>
+                <td scope="col" class="columnTotals">{{ totalDividendYield  | percent : '1.0-2'}}</td>
+                <td scope="col" class="columnTotals">{{ totalYieldOnCost  | percent : '1.0-2'}}</td>
+                <td scope="col" class="columnTotals">{{ annualIncome | currency}}</td>
             </tr>
         </thead>
         <tbody *ngIf="displayData != undefined">
@@ -60,8 +60,8 @@
                 </td>
                 <th scope="row" class="symbols">{{ data[0].tickerSymbol }}</th>
                 <td class="left">{{ data[1].price.exchangeName }}</td>
-                <td>{{ data[0].fractionalShares }}</td>
-                <td>{{ data[0].averageCost | currency}}</td>
+                <td><input class="portfolioNumberInput" type="number" aria-label="" value="{{ data[0].fractionalShares }}" /></td>
+                <td><input class="portfolioNumberInput"  type="string" arial-label="{{ data[0].averageCost | currency }}" value="{{ data[0].averageCost | currency}}" /></td>
                 <td>{{ data[0].fractionalShares * data[0].averageCost | currency}}</td>
                 <td>{{ data[1].price.regularMarketPrice.raw *  data[0].fractionalShares | currency }}</td>
                 <td>{{ data[1].price.regularMarketPrice.raw | currency }}</td>
