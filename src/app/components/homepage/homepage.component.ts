@@ -4,6 +4,7 @@ import { DefaultService } from '../../services/default.service';
 import { DefaultData } from '../../models/defaultData';
 import { DeleteStockService } from '../../services/delete-stock.service';
 import { ColumnTotalsService } from '../../services/column-totals.service';
+import { RowUpdateService } from '../../services/row-update.service';
 import { AppComponent} from '../../app.component';
 
 @Component({
@@ -32,6 +33,7 @@ export class HomepageComponent implements OnInit {
   constructor(private defaultService: DefaultService, 
     public appComponent: AppComponent, 
     private columnTotalsService: ColumnTotalsService,
+    private rowUpdateService: RowUpdateService,
     private deleteStockService: DeleteStockService) { }
 
     /**
@@ -205,6 +207,14 @@ export class HomepageComponent implements OnInit {
                 this.annualIncome = this.columnTotalsService.getAnnualIncome();
                 break;
         }
+    }
+
+
+    onUpdateFractionalShares(event: any, data: any) {
+        console.log('change event');
+        console.log(event.target.value);
+        console.log(data);
+        this.rowUpdateService.updateFractionalShares(event.target.value, data);
     }
 
   ngOnInit(): void {

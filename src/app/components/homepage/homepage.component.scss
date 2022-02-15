@@ -1,4 +1,5 @@
 table {
+
     th, td {
         text-align: center;
         font-weight: 400;
@@ -55,4 +56,11 @@ input {
         text-align: center;
         padding: 0.25em;
     }
+}
+
+.mainAlert {
+    width: 100%;
+    margin: 0 auto; 
+    height: 200px; 
+    text-align: center;
 }

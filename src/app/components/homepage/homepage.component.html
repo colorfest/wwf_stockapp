@@ -60,8 +60,9 @@
                 </td>
                 <th scope="row" class="symbols">{{ data[0].tickerSymbol }}</th>
                 <td class="left">{{ data[1].price.exchangeName }}</td>
-                <td><input class="portfolioNumberInput" type="number" aria-label="" value="{{ data[0].fractionalShares }}" /></td>
-                <td><input class="portfolioNumberInput"  type="string" arial-label="{{ data[0].averageCost | currency }}" value="{{ data[0].averageCost | currency}}" /></td>
+                <td><input class="portfolioNumberInput" type="number" (blur)="onUpdateFractionalShares($event, data)"
+                    value="{{ data[0].fractionalShares }}" /></td>
+                <td><input class="portfolioNumberInput"  type="string" value="{{ data[0].averageCost | currency}}" /></td>
                 <td>{{ data[0].fractionalShares * data[0].averageCost | currency}}</td>
                 <td>{{ data[1].price.regularMarketPrice.raw *  data[0].fractionalShares | currency }}</td>
                 <td>{{ data[1].price.regularMarketPrice.raw | currency }}</td>
@@ -69,7 +70,7 @@
                 <td>{{ data[0].averageCost == '0.00' ? (0 | number : '1.0-2') : ( (((data[1].price.regularMarketPrice.raw *  data[0].fractionalShares) - (data[0].fractionalShares * data[0].averageCost)) / (data[0].fractionalShares * data[0].averageCost)) * 100 | number : '1.0-2') }} %</td>
                 <td class="left">{{ data[1].quoteType.longName }}</td>
                 <td>{{ data[1].price.currency}}</td>
-                <td>{{ data[1].assetProfile.sector }}</td>
+                <td class="left">{{ data[1].assetProfile.sector }}</td>
                 <td>{{ data[1].summaryDetail.trailingAnnualDividendRate.raw  == '' ? '' : data[1].summaryDetail.trailingAnnualDividendRate.raw | currency}}</td>
                 <td class="left">{{ data[1].calendarEvents.exDividendDate.fmt | date: 'MMMM d, y'}}</td>
                 <td class="left">{{ data[1].calendarEvents.dividendDate.fmt | date: 'MMMM d, y' }}</td>
@@ -81,7 +82,7 @@
     </table>
 </div>
 
-<div *ngIf="showAlert" style="width: 100%; margin: 0 auto; height: 200px; text-align: center;">
+<div *ngIf="showAlert" class="mainAlert">
     <h5>No Data To Display</h5>
     <p>If you believe you are seeing this in error, please try refreshing your page or contact administrator.</p>
     <p>If you have not yet entered any stocks, do so by clicking on the "Add Stock" button in the top menu.</p>
