@@ -1,0 +1,66 @@
+table {
+
+    th, td {
+        text-align: center;
+        font-weight: 400;
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
+        padding: 0.7em 0.25em;
+        vertical-align: middle;
+        border: none;
+    }
+
+    tr {
+        &.totals {
+            background: #232323;
+        }
+    }
+
+    th {
+        background: #000;
+        &.symbols {
+            background: #3044b5;
+        }
+    }
+
+    td {
+        font-weight: normal;
+        letter-spacing: 0em;
+        text-transform: capitalize;
+        padding-left: 0.75em;
+        &.left {
+            text-align: left;
+        }
+        &.deleteColumn {
+            text-align: center;
+            padding: 2px;
+            width: 10px;
+            background: black;
+        }
+        &.symbols {
+            background: #2436aa;
+        }
+    }
+}
+
+h5 {
+    color: red;
+    font-size: 2em;
+}
+
+input {
+    &.portfolioNumberInput {
+        background: #232323;
+        color: #ffffff;
+        border: none;
+        text-align: center;
+        padding: 0.25em;
+    }
+}
+
+.mainAlert {
+    width: 100%;
+    margin: 0 auto; 
+    height: 200px; 
+    text-align: center;
+}

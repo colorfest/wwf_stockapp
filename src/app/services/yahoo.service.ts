@@ -15,7 +15,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class DefaultService {
+export class YahooService {
   constructor(private http: HttpClient) { }
   
   dataUrl: string = '';

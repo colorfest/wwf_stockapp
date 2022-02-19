@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DefaultService } from './default.service';
+import { DefaultService } from './yahoo.service';
 
 describe('DefaultService', () => {
   let service: DefaultService;

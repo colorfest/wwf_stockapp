@@ -1,0 +1,79 @@
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-dark table-hover table-sm">
+        <thead>
+            <tr>
+                <th></th>
+                <th scope="col" class="symbols">Symbol</th>
+                <th scope="col">Exchange</th>
+                <th scope="col">Fractional <br/>Shares</th>
+                <th scope="col">Average Cost</th>
+                <th scope="col">Cost Basis</th>
+                <th scope="col">Market <br />Value</th>
+                <th scope="col">Market <br />Price</th>
+                <th scope="col">Gain/Loss</th>
+                <th scope="col">Growth</th>
+                <th scope="col">Name</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Sector</th>
+                <th scope="col">Annual <br>Dividend</th>
+                <th scope="col">EX / EFF <br />Dividend</th>
+                <th scope="col">Payment Date</th>
+                <th scope="col">Dividend <br />Yield</th>
+                <th scope="col">Yield on <br />Cost</th>
+                <th scope="col">Annual <br />Income</th>
+            </tr>
+            <tr class="totals">
+                <td></td>
+                <td></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col" class="columnTotals">{{ costBasisTotal | currency }}</td>
+                <td scope="col" class="columnTotals">{{ marketValueTotal | currency }}</td>
+                <td scope="col"></td>
+                <td scope="col" class="columnTotals">{{ gainLossTotal | currency }}</td>
+                <td scope="col" class="columnTotals">{{ totalGrowth | number : '1.0-2' }}%</td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col" class="columnTotals">{{ totalDividendYield  | percent : '1.0-2'}}</td>
+                <td scope="col" class="columnTotals">{{ totalYieldOnCost  | percent : '1.0-2'}}</td>
+                <td scope="col" class="columnTotals">{{ annualIncome | currency}}</td>
+            </tr>
+        </thead>
+        <tbody *ngIf="displayData != undefined">
+            <tr *ngFor="let data of displayData">
+                <td class="deleteColumn">
+                    <button mat-button aria-label="Delete" (click)="deleteStock(data)">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+                    </button>
+                </td>
+                <th scope="row" class="symbols">{{ data.tickerSymbol }}</th>
+                
+                <td class="left">{{ data.price.exchangeName }}</td>
+                <td><input class="portfolioNumberInput" type="number" (blur)="onUpdateFractionalShares($event, data)"
+                    value="{{ data.fractionalShares }}" /></td>
+                <td><input class="portfolioNumberInput"  type="string" value="{{ data.averageCost | currency}}" /></td>
+                <td>{{ data.fractionalShares * data.averageCost | currency}}</td>
+                <td>{{ data.price.regularMarketPrice.raw *  data.fractionalShares | currency }}</td>
+                <td>{{ data.price.regularMarketPrice.raw | currency }}</td>
+                <td>{{ (data.price.regularMarketPrice.raw *  data.fractionalShares) - (data.fractionalShares * data.averageCost)| currency }}</td>
+                <td>{{ data.averageCost == '0.00' ? (0 | number : '1.0-2') : ( (((data.price.regularMarketPrice.raw *  data.fractionalShares) - (data.fractionalShares * data.averageCost)) / (data.fractionalShares * data.averageCost)) * 100 | number : '1.0-2') }} %</td>
+                <td class="left">{{ data.quoteType.longName }}</td>
+                <td>{{ data.price.currency}}</td>
+                <td class="left">{{ data.assetProfile.sector }}</td>
+                <td>{{ data.summaryDetail.trailingAnnualDividendRate.raw  == '' ? '' : data.summaryDetail.trailingAnnualDividendRate.raw | currency}}</td>
+                <td class="left">{{ data.calendarEvents.exDividendDate.fmt | date: 'MMMM d, y'}}</td>
+                <td class="left">{{ data.calendarEvents.dividendDate.fmt | date: 'MMMM d, y' }}</td>
+                <td>{{ data.summaryDetail.dividendYield.fmt }}</td>
+                <td>{{ data.averageCost == '0.00' ? 0 : ((data.summaryDetail.trailingAnnualDividendRate.raw / data.averageCost) | percent : '1.0-2') }}</td>
+                <td>{{ data.summaryDetail.trailingAnnualDividendRate.raw * data.fractionalShares | currency }}</td>
+            
+            </tr>
+        </tbody>
+</table>

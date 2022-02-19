@@ -15,13 +15,18 @@ export class ColumnTotalsService {
    * Calculate the total cost basis (average cost * fractional shares)
    * @returns number
    */
-  getCostBasisTotal() {
+  getCostBasisTotal(data) {
+    console.log(`GET COST BASIS TOTAL`);
+    console.log(data);
 
     var costBasisTotal: number = 0;
 
     // loop through and add up costs basis
-    this.currentPortfolio.forEach(element => {
-      costBasisTotal = costBasisTotal + (element[0].fractionalShares * element[0].averageCost);
+
+    data.forEach(element => {
+      console.log(element.fractionalShares);
+      console.log(element.averageCost);
+      costBasisTotal = costBasisTotal + (element.fractionalShares * element.averageCost);
     });
 
     return costBasisTotal;
@@ -31,12 +36,12 @@ export class ColumnTotalsService {
    * Calculate the total market value of the portfolio (regular market price * fractional shares)
    * @returns number
    */
-  getMarketValueTotal() {
+  getMarketValueTotal(data: any) {
     var marketValueTotal: number = 0;
 
     // loop through and add up market value
-    this.currentPortfolio.forEach(element => {
-      marketValueTotal = marketValueTotal + (element[1].price.regularMarketPrice.raw *  element[0].fractionalShares);
+    data.forEach(element => {
+      marketValueTotal = marketValueTotal + (element.price.regularMarketPrice.raw *  element.fractionalShares);
     });
 
     return marketValueTotal;
@@ -45,13 +50,14 @@ export class ColumnTotalsService {
   /**
    * Calculate the total gain/loss of the portfolio ()
    * @returns number
+   * @param incoming data
    */
-  getGainLossTotal() {
+  getGainLossTotal(data: any) {
     var gainLossTotal: number = 0;
 
     // loop through and add up gain/loss
-    this.currentPortfolio.forEach(element => {
-      gainLossTotal = gainLossTotal + (element[1].price.regularMarketPrice.raw *  element[0].fractionalShares) - (element[0].fractionalShares * element[0].averageCost);
+    data.forEach(element => {
+      gainLossTotal = gainLossTotal + (element.price.regularMarketPrice.raw *  element.fractionalShares) - (element.fractionalShares * element.averageCost);
     })
 
     return gainLossTotal;
@@ -59,16 +65,17 @@ export class ColumnTotalsService {
 
   /**
    * Average the total growth of the portfolio.
+   * @param the incoming data
    * @returns number
    */
-  getTotalGrowth() {
+  getTotalGrowth(data: any) {
     var growthTotal: number = 0;
     var counter: number = 0;
 
     // loop through and average out the total growth
-    this.currentPortfolio.forEach(element => {
-      if (element[0].averageCost != '0.00')
-        growthTotal = growthTotal + (element[0].averageCost == '0.00' ? (0.00) : ( (((element[1].price.regularMarketPrice.raw *  element[0].fractionalShares) - (element[0].fractionalShares * element[0].averageCost)) / (element[0].fractionalShares * element[0].averageCost)) * 100.00));
+    data.forEach(element => {
+      if (element.averageCost != '0.00')
+        growthTotal = growthTotal + (element.averageCost == '0.00' ? (0.00) : ( (((element.price.regularMarketPrice.raw *  element.fractionalShares) - (element.fractionalShares * element.averageCost)) / (element.fractionalShares * element.averageCost)) * 100.00));
         counter++;
     })
 
@@ -79,15 +86,16 @@ export class ColumnTotalsService {
 
   /**
    * Calculate the total dividend yield average
+   * @param the incoming data
    * @returns number
    */
-  getTotalDividendYield() {
+  getTotalDividendYield(data: any) {
     var totalDividendYield: number = 0;
     var counter: number = 0;
 
-    this.currentPortfolio.forEach(element => {
-      if(element[1].summaryDetail.dividendYield.raw)
-        totalDividendYield = totalDividendYield + element[1].summaryDetail.dividendYield.raw;
+    data.forEach(element => {
+      if(element.summaryDetail.dividendYield.raw)
+        totalDividendYield = totalDividendYield + element.summaryDetail.dividendYield.raw;
         counter++;
     })
 
@@ -98,16 +106,17 @@ export class ColumnTotalsService {
 
   /**
    * Calculate the average Yield On Cost
+   * @param the incoming data
    * @returns number
    */
-  getTotalYieldOnCost() {
+  getTotalYieldOnCost(data: any) {
     var totalYieldOnCost: number = 0;
     var counter: number = 0;
 
-    this.currentPortfolio.forEach(element => {
+    data.forEach(element => {
 
-      if ( (element[0].averageCost != '0.00')&&(element[1].summaryDetail.trailingAnnualDividendRate.raw != undefined) ) {
-        totalYieldOnCost = totalYieldOnCost +  (element[0].averageCost == '0.00' ? 0 : ((element[1].summaryDetail.trailingAnnualDividendRate.raw / element[0].averageCost)));
+      if ( (element.averageCost != '0.00')&&(element.summaryDetail.trailingAnnualDividendRate.raw != undefined) ) {
+        totalYieldOnCost = totalYieldOnCost +  (element.averageCost == '0.00' ? 0 : ((element.summaryDetail.trailingAnnualDividendRate.raw / element.averageCost)));
         counter++;
       }
     })
@@ -119,14 +128,15 @@ export class ColumnTotalsService {
 
   /**
    * Add up all dividend annual income
+   * @param the incoming data
    * @returns number
    */
-  getAnnualIncome() {
+  getAnnualIncome(data: any) {
     var annualIncome: number = 0;
 
-    this.currentPortfolio.forEach(element => {
-      if (element[1].summaryDetail.trailingAnnualDividendRate.raw)
-        annualIncome = annualIncome + (element[1].summaryDetail.trailingAnnualDividendRate.raw * element[0].fractionalShares );
+    data.forEach(element => {
+      if (element.summaryDetail.trailingAnnualDividendRate.raw)
+        annualIncome = annualIncome + (element.summaryDetail.trailingAnnualDividendRate.raw * element.fractionalShares );
     })
     
     return annualIncome;

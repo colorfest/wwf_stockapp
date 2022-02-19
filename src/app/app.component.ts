@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Wrestling With Finance Dividend Stock App';
   stockAdded: boolean = false;
+  userFullStockData = [];
 }

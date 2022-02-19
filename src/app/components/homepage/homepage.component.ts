@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DefaultService } from '../../services/default.service';
+import { YahooService } from '../../services/yahoo.service';
 import { DefaultData } from '../../models/defaultData';
 import { DeleteStockService } from '../../services/delete-stock.service';
 import { ColumnTotalsService } from '../../services/column-totals.service';
@@ -30,7 +30,7 @@ export class HomepageComponent implements OnInit {
   totalYieldOnCost: number;
   annualIncome: number;
 
-  constructor(private defaultService: DefaultService, 
+  constructor(private yahooService: YahooService, 
     public appComponent: AppComponent, 
     private columnTotalsService: ColumnTotalsService,
     private rowUpdateService: RowUpdateService,
@@ -79,7 +79,7 @@ export class HomepageComponent implements OnInit {
         if (this.userStockData) {
             this.userStockData.forEach(element => {
     
-                this.data$ = this.defaultService.getData(element.tickerSymbol)
+                this.data$ = this.yahooService.getData(element.tickerSymbol)
                   .subscribe(data => {
                     this.config = <DefaultData>data;
                     
@@ -190,7 +190,7 @@ export class HomepageComponent implements OnInit {
         switch (type) {
 
             case "fractionalShares":
-                this.costBasisTotal = this.columnTotalsService.getCostBasisTotal();
+                //this.costBasisTotal = this.columnTotalsService.getCostBasisTotal();
                 console.log(`Cost Basis total: ${this.costBasisTotal}`);
                 break;
 
@@ -198,13 +198,13 @@ export class HomepageComponent implements OnInit {
                 break;
 
             default:
-                this.costBasisTotal = this.columnTotalsService.getCostBasisTotal();
-                this.marketValueTotal = this.columnTotalsService.getMarketValueTotal();
-                this.gainLossTotal = this.columnTotalsService.getGainLossTotal();
-                this.totalGrowth = this.columnTotalsService.getTotalGrowth();
-                this.totalDividendYield = this.columnTotalsService.getTotalDividendYield();
-                this.totalYieldOnCost = this.columnTotalsService.getTotalYieldOnCost();
-                this.annualIncome = this.columnTotalsService.getAnnualIncome();
+                // this.costBasisTotal = this.columnTotalsService.getCostBasisTotal();
+                // this.marketValueTotal = this.columnTotalsService.getMarketValueTotal();
+                // this.gainLossTotal = this.columnTotalsService.getGainLossTotal();
+                // this.totalGrowth = this.columnTotalsService.getTotalGrowth();
+                // this.totalDividendYield = this.columnTotalsService.getTotalDividendYield();
+                // this.totalYieldOnCost = this.columnTotalsService.getTotalYieldOnCost();
+                // this.annualIncome = this.columnTotalsService.getAnnualIncome();
                 break;
         }
     }
