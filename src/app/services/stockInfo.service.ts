@@ -4,21 +4,21 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Stocks } from '../models/Stocks';
-import { User } from '../models/User';
+import { StockInfo } from '../models/StockInfo';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class StockInfoService {
   // stock info
   stockCollection: AngularFirestoreCollection<Stocks>;
   stocks: Observable<Stocks[]>;
 
   // user info
-  usersCollection: AngularFirestoreCollection<User>;
-  userDoc: AngularFirestoreDocument<User>;
-  users: Observable<User[]>;
-  user: Observable<User>;
+  usersCollection: AngularFirestoreCollection<StockInfo>;
+  userDoc: AngularFirestoreDocument<StockInfo>;
+  users: Observable<StockInfo[]>;
+  user: Observable<StockInfo>;
 
   constructor(private afs: AngularFirestore) {
     this.stockCollection = this.afs.collection('stocks',
@@ -26,6 +26,8 @@ export class UsersService {
   }
 
   getStocks(): Observable<Stocks[]> {
+    console.log('GET STOCKS');
+    console.log('stock collection');console.log(this.stockCollection);
     // get stocks with id - use snapshot changes
     this.stocks = this.stockCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(action => {
@@ -37,5 +39,9 @@ export class UsersService {
     }));
 
     return this.stocks;
+  }
+
+  fetchUserStockData(stocks: Stocks) {
+    console.log(stocks);
   }
 }

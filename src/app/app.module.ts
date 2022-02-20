@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -20,15 +21,15 @@ import { AddStockComponent } from './components/add-stock/add-stock.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { AddStockService } from './services/add-stock.service';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms/';
-import {MatIconModule} from '@angular/material/icon';
 import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
+
 
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { StockListFullComponent } from './components/stock-list-full/stock-list-full.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './auth/auth.service';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LoginComponent } from './components/login/login.component';
     TopNavComponent,
     ModalAlertComponent,
     StockListFullComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -49,15 +51,12 @@ import { LoginComponent } from './components/login/login.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    MatButtonModule,
-    MatInputModule, 
-    MatIconModule,
     RxReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [YahooService, AddStockService, CurrencyPipe],
+  providers: [YahooService, AddStockService, CurrencyPipe, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

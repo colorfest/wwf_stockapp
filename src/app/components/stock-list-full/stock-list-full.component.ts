@@ -4,8 +4,10 @@ import { Stocks } from 'src/app/models/Stocks';
 import { ColumnTotalsService } from 'src/app/services/column-totals.service';
 import { DeleteStockService } from 'src/app/services/delete-stock.service';
 import { RowUpdateService } from 'src/app/services/row-update.service';
-import { UsersService } from 'src/app/services/users.service';
+import { StockInfoService } from 'src/app/services/stockInfo.service';
 import { YahooService } from 'src/app/services/yahoo.service';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stock-list-full',
@@ -28,7 +30,10 @@ export class StockListFullComponent implements OnInit {
   totalYieldOnCost: number;
   annualIncome: number;
 
-  constructor(private usersService: UsersService,
+  private fbSubs: Subscription[] = [];
+
+  constructor(private stockInfoService: StockInfoService,
+    private db: AngularFirestore,
     private yahooService: YahooService,
     private columnTotalsService: ColumnTotalsService,
     private rowUpdateService: RowUpdateService,
@@ -158,13 +163,20 @@ export class StockListFullComponent implements OnInit {
     this.fetchNewData();
   }
 
+  cancelSubscriptions() {
+    this.fbSubs.forEach(sub => sub.unsubscribe());
+  }
+
   ngOnInit(): void {
-    this.usersService.getStocks().subscribe((stockList) => {
-      this.stockList = stockList;
+    this.fbSubs.push(this.stockInfoService.getStocks().subscribe((stockList) => {
+      this.stockList = stockList; 
+
+      console.log('stock list');
+      console.log(this.stockList);
+
       this.checkStockDataComplete();
     }, (err: Error) => {
       console.log(`An error occurred in retrieving the user's stock info.`);
-    })
+    }))
   }
-
 }

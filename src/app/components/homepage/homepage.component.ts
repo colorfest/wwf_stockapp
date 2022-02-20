@@ -218,7 +218,7 @@ export class HomepageComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    
+    /*
 
     // localStorage.clear();
     // this.inputItem = localStorage.wwfStockData;
@@ -239,6 +239,7 @@ export class HomepageComponent implements OnInit {
     } else {
         this.setNoDataDisplay();
     }
+  */
   }
 
 }

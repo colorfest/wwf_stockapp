@@ -5,11 +5,14 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './auth/auth.guard';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'signin', component: SignupComponent},
+  {path: 'homepage', component: HomepageComponent},
   {path: 'add-stock', component: AddStockComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

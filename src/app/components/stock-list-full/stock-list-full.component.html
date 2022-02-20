@@ -49,8 +49,7 @@
         <tbody *ngIf="displayData != undefined">
             <tr *ngFor="let data of displayData">
                 <td class="deleteColumn">
-                    <button mat-button aria-label="Delete" (click)="deleteStock(data)">
-                        <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+                    <button mat-button aria-label="Delete" (click)="deleteStock(data)">delete
                     </button>
                 </td>
                 <th scope="row" class="symbols">{{ data.tickerSymbol }}</th>
