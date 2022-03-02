@@ -1,11 +1,39 @@
-<section class="signup-form">
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+<section class="signup-container">
 
-        <input type="email" matInput placeholder="Your email" ngModel name="email" email required #emailInput="ngModel">
-        
-        <input type="password" matInput placeholder="Your password" ngModel name="password" required minlength="6" #pwInput="ngModel">
-        
-      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
-    </form>
-  </section>
-  
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="email">Email</span>
+      </div>
+      <input type="text" class="form-control" formControlName="email" placeholder="Email" aria-label="Email" aria-describedby="email">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="username">Username</span>
+      </div>
+      <input type="text" class="form-control" formControlName="username" placeholder="Username" aria-label="Username" aria-describedby="username">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="pword">Password</span>
+      </div>
+      <input type="password" class="form-control" formControlName="password" placeholder="Password" aria-label="Password" aria-describedby="pword">
+    </div>
+
+    <div class="input-group mb-3">
+      <input type="checkbox" class="form-control">
+      <label for="checkbox">Agree to Terms and Conditions</label>
+    </div>
+
+    <div class="input-group-mb3">
+      <button class="btn btn-primary mb-2" type="submit"
+      [disabled]="loginForm.invalid">
+          Login
+      </button>
+    </div>
+  </form>
+    
+</section>

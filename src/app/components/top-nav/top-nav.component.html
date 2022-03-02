@@ -1,7 +1,20 @@
-<h1>Wrestling With Finance - Portfolio Tracker</h1>
+<div class="header-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h1>Wrestling With Finance - Portfolio Tracker</h1>
+            </div>
+            <div class="col-md-2 col-sm-12 offset-md-4" *ngIf="!isAuth">
+                <button class="btn btn-primary" routerLink="/signup">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<button routerLink="/">Stock Portfolio</button>
-<button routerLink="/add-stock">Add Stock</button>
-<button (click)="onLogout()">Logout</button>
+<div *ngIf="isAuth">
+    <button routerLink="/">Stock Portfolio</button>
+    <button routerLink="/add-stock">Add Stock</button>
+    <button (click)="onLogout()">Logout</button>
+</div>
 
 <hr>
