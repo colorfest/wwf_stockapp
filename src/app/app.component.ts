@@ -7,7 +7,7 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Wrestling With Finance Dividend Stock App';
+  title = 'Wrestling With Finance Stock App';
   stockAdded: boolean = false;
   userFullStockData = [];
 
