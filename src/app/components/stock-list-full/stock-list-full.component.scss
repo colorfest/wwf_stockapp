@@ -68,3 +68,16 @@ input {
 .main-container {
     margin-top: 5em;
 }
+
+.deleteButton {
+    padding: 0.25em;
+    cursor: pointer;
+    display: block;
+}
+
+.table-dark tbody tr {
+    &:hover {
+        background: #fafafa;
+        color: #000;
+    }
+}
