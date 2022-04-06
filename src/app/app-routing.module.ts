@@ -9,11 +9,11 @@ import { SignupComponent } from './components/signup/signup.component';
 
 
 const routes: Routes = [
-  {path: '', component: HomepageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'homepage', component: HomepageComponent},
   {path: 'add-stock', component: AddStockComponent},
+  {path: '', component: HomepageComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

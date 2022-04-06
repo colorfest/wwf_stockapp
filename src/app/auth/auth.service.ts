@@ -15,31 +15,18 @@ export class AuthService {
     constructor(private router: Router, private afAuth: AngularFireAuth) {}
 
     initAuthListener() {
+        console.log('AUTH USER LISTENER');
         this.afAuth.authState.subscribe(user => {
             if (user) {
                 this.isAuthenticated = true;
                 this.authChange.next(true);
-                this.router.navigate(['/homepage']);
+                //this.router.navigate(['/homepage']);
+                console.log(user);
             } else {
                 this.authChange.next(false);
                 this.router.navigate(['/login']);
                 this.isAuthenticated = false;
             }
-        });
-    }
-
-    /**
-     * Get the information about the current logged in user
-     * @returns Client object with logged in user's information
-     */
-    getUserInfo() {
-        this.afAuth.authState.subscribe(user => {
-            this.currentUserInfo = [{
-                userId: user.displayName,
-                email: user.email
-            }];
-            console.log('return user info');console.log(this.currentUserInfo);
-            return this.currentUserInfo;
         });
     }
 

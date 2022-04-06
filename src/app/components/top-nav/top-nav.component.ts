@@ -20,6 +20,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    
     this.authSubscription = this.authService.authChange.subscribe(authStatus => {
       this.isAuth = authStatus;
       if (this.isAuth == true) {
@@ -29,9 +30,6 @@ export class TopNavComponent implements OnInit, OnDestroy {
           userName: firebase.auth().currentUser.displayName
         }];
       };
-      
-      console.log('CURRENT USER');
-      console.log(this.currentUserInfo[0].userName);
     });
   }
 
