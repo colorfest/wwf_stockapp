@@ -5,3 +5,10 @@
         max-width: 100%;
     }
 }
+
+.btn-link {
+    color: white;
+    &:hover {
+        color: lightcoral;
+    }
+}

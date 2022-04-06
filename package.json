@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~9.0.2",
     "@angular/router": "~9.0.2",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
+    "@popperjs/core": "^2.11.5",
     "@rxweb/reactive-form-validators": "^2.1.6",
     "angularfire2": "^5.4.2",
     "bootstrap": "^4.6.1",

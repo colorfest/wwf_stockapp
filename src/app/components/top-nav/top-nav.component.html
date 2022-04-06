@@ -1,4 +1,4 @@
-<div class="header-container">
+<!-- <div class="header-container">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12">
@@ -20,4 +20,36 @@
     <button (click)="onLogout()">Logout</button>
 </div>
 
-<hr>
+<hr> -->
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <a href="#" class="navbar-brand">
+        <img src="/assets/logo-main.png" width="64" height="38" class="d-inline-block align-top" alt="Wrestling With Finance" />
+    </a>
+    <button class="navbar-toggler" type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarNavAltMarkup" 
+        aria-controls="navbarNavAltMarkup" 
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" routerLink="/">Stock Portfolio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/add-stock">Add Stock</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/">Pricing</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <strong>{{ currentUserInfo[0].userName }}</strong> | <button class="btn btn-link" (click)="onLogout()">Logout</button>
+          </span>
+    </div>
+</nav>
