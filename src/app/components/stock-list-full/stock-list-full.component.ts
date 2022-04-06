@@ -30,8 +30,6 @@ export class StockListFullComponent implements OnInit {
   totalYieldOnCost: number;
   annualIncome: number;
 
-  testUser: Observable<any>;
-
   private fbSubs: Subscription[] = [];
 
   constructor(private stockInfoService: StockInfoService,
@@ -138,6 +136,8 @@ export class StockListFullComponent implements OnInit {
           // push to displayData array
           this.displayData.push(finalData);
 
+          // TODO: Order the results by tickerSymbol
+
           itemsProcessed++;
 
           // update loading
@@ -180,9 +180,5 @@ export class StockListFullComponent implements OnInit {
     }, (err: Error) => {
       console.log(`An error occurred in retrieving the user's stock info.`);
     }))
-
-    // this.testUser = this.stockInfoService.getTestUser();
-    // console.log('TEST USER');
-    // console.log(this.testUser);debugger;
   }
 }

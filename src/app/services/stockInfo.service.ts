@@ -23,18 +23,20 @@ export class StockInfoService {
   constructor(private afs: AngularFirestore) {
     // set stockCollection based on user
     this.stockCollection = this.afs.collection('/users/VSkKdm4Js36DYwixZh7L/userStocks',
-    ref => ref.orderBy('tickerSymbol', 'asc'))
+    ref => ref.orderBy('tickerSymbol', 'desc'))
   }
 
   getStocks(): Observable<Stocks[]> {
     console.log('GET STOCKS');
     console.log('stock collection');console.log(this.stockCollection);
+    
     // get stocks with id - use snapshot changes
     this.stocks = this.stockCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(action => {
         const data = action.payload.doc.data() as Stocks;
-        // data.id = action.payload.doc.id;
-        console.log(data);
+
+        // add document id for later edits or deletes
+        data.id = action.payload.doc.id;
 
         return data;
       });

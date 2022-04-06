@@ -26,6 +26,7 @@ export class AuthService {
                 this.authChange.next(false);
                 this.router.navigate(['/login']);
                 this.isAuthenticated = false;
+                alert('not logged in');
             }
         });
     }
@@ -56,6 +57,7 @@ export class AuthService {
             .signInWithEmailAndPassword(authData.email, authData.password)
             .then(result => {
                 console.log(result);
+                this.router.navigate(['/homepage']);
             })
             .catch(error => {
                 console.log(`An error occurred when signing in ${error}.`);

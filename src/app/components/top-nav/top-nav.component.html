@@ -1,27 +1,3 @@
-<!-- <div class="header-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <h1>Wrestling With Finance - Portfolio Tracker</h1>
-            </div>
-            <div class="col-md-2 col-sm-12 offset-md-4" *ngIf="!isAuth">
-                <button class="btn btn-primary" routerLink="/signup">Sign Up</button>
-            </div>
-            <div class="col-md-2 col-sm-12 offset-md-4" *ngIf="isAuth">
-                <h4>{{ currentUserInfo[0].userName }}</h4>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div *ngIf="isAuth">
-    <button routerLink="/">Stock Portfolio</button>
-    <button routerLink="/add-stock">Add Stock</button>
-    <button (click)="onLogout()">Logout</button>
-</div>
-
-<hr> -->
-
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
     <a href="#" class="navbar-brand">
         <img src="/assets/logo-main.png" width="64" height="38" class="d-inline-block align-top" alt="Wrestling With Finance" />
@@ -44,16 +20,16 @@
             <li class="nav-item" [routerLinkActive]="['active']">
               <a class="nav-link" routerLink="/add-stock">Add Stock</a>
             </li>
-            <!-- <li class="nav-item" [routerLinkActive]="['active']">
-              <a class="nav-link" routerLink="/">Pricing</a>
-            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" (click)="onLogout()">Logout</a>
+            </li>
           </ul>
           <span class="navbar-text">
             <strong>
                 <span *ngIf="currentUserInfo">
-                    {{ currentUserInfo[0].email }}
+                    {{ currentUserInfo[0]?.userName || currentUserInfo[0]?.email }}
                 </span>
-            </strong> | <button class="btn btn-link" (click)="onLogout()">Logout</button>
+            </strong>
           </span>
     </div>
 </nav>
