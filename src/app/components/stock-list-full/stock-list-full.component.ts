@@ -7,7 +7,7 @@ import { RowUpdateService } from 'src/app/services/row-update.service';
 import { StockInfoService } from 'src/app/services/stockInfo.service';
 import { YahooService } from 'src/app/services/yahoo.service';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stock-list-full',
@@ -29,6 +29,8 @@ export class StockListFullComponent implements OnInit {
   totalDividendYield: number;
   totalYieldOnCost: number;
   annualIncome: number;
+
+  testUser: Observable<any>;
 
   private fbSubs: Subscription[] = [];
 
@@ -178,5 +180,9 @@ export class StockListFullComponent implements OnInit {
     }, (err: Error) => {
       console.log(`An error occurred in retrieving the user's stock info.`);
     }))
+
+    // this.testUser = this.stockInfoService.getTestUser();
+    // console.log('TEST USER');
+    // console.log(this.testUser);debugger;
   }
 }

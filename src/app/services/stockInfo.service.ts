@@ -21,7 +21,8 @@ export class StockInfoService {
   user: Observable<StockInfo>;
 
   constructor(private afs: AngularFirestore) {
-    this.stockCollection = this.afs.collection('stocks',
+    // set stockCollection based on user
+    this.stockCollection = this.afs.collection('/users/VSkKdm4Js36DYwixZh7L/userStocks',
     ref => ref.orderBy('tickerSymbol', 'asc'))
   }
 
@@ -34,9 +35,12 @@ export class StockInfoService {
         const data = action.payload.doc.data() as Stocks;
         // data.id = action.payload.doc.id;
         console.log(data);
+
         return data;
       });
     }));
+
+    this.stocks.subscribe(res => console.log('stocks', res));
 
     return this.stocks;
   }

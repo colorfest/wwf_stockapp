@@ -3,4 +3,5 @@ export interface Stocks {
     tickerSymbol?: string;
     averageCost?: number;
     fractionalShares?: number;
+    userId?: string;
 }

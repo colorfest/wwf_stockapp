@@ -40,6 +40,7 @@ export class HomepageComponent implements OnInit {
      * Get the current saved data
      */
     fetchCurrentData() {
+        console.log('fetch current data');debugger;
 
         // clean display data
         this.displayData = [];
