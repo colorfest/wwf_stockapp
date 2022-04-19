@@ -1,28 +1,27 @@
 <div class="main-container">
-
-    <div class="table-responsive">
+    <div>
         <table class="table table-striped table-dark table-hover table-sm">
-            <thead>
+            <thead style="position: sticky; top: 0;">
                 <tr>
                     <th></th>
-                    <th scope="col" class="symbols">Symbol</th>
-                    <th scope="col">Exchange</th>
-                    <th scope="col">Fractional <br/>Shares</th>
-                    <th scope="col">Average Cost</th>
-                    <th scope="col">Cost Basis</th>
-                    <th scope="col">Market <br />Value</th>
-                    <th scope="col">Market <br />Price</th>
-                    <th scope="col">Gain/Loss</th>
-                    <th scope="col">Growth</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Currency</th>
-                    <th scope="col">Sector</th>
-                    <th scope="col">Annual <br>Dividend</th>
-                    <th scope="col">EX / EFF <br />Dividend</th>
-                    <th scope="col">Payment Date</th>
-                    <th scope="col">Dividend <br />Yield</th>
-                    <th scope="col">Yield on <br />Cost</th>
-                    <th scope="col">Annual <br />Income</th>
+                    <th scope="col" class="symbols header">Symbol</th>
+                    <th scope="col" class="header">Exchange</th>
+                    <th scope="col" class="header">Fractional <br/>Shares</th>
+                    <th scope="col" class="header">Average Cost</th>
+                    <th scope="col" class="header">Cost Basis</th>
+                    <th scope="col" class="header">Market <br />Value</th>
+                    <th scope="col" class="header">Market <br />Price</th>
+                    <th scope="col" class="header">Gain/Loss</th>
+                    <th scope="col" class="header">Growth</th>
+                    <th scope="col" class="header">Name</th>
+                    <th scope="col" class="header">Currency</th>
+                    <th scope="col" class="header">Sector</th>
+                    <th scope="col" class="header">Annual <br>Dividend</th>
+                    <th scope="col" class="header">EX / EFF <br />Dividend</th>
+                    <th scope="col" class="header">Payment Date</th>
+                    <th scope="col" class="header">Dividend <br />Yield</th>
+                    <th scope="col" class="header">Yield on <br />Cost</th>
+                    <th scope="col" class="header">Annual <br />Income</th>
                 </tr>
                 <tr class="totals">
                     <td></td>
@@ -68,8 +67,8 @@
                     <td>{{ data.price.currency}}</td>
                     <td class="left">{{ data.assetProfile.sector }}</td>
                     <td>{{ data.summaryDetail.trailingAnnualDividendRate.raw  == '' ? '' : data.summaryDetail.trailingAnnualDividendRate.raw | currency}}</td>
-                    <td class="left">{{ data.calendarEvents.exDividendDate.fmt | date: 'MMMM d, y'}}</td>
-                    <td class="left">{{ data.calendarEvents.dividendDate.fmt | date: 'MMMM d, y' }}</td>
+                    <td class="left">{{ data.calendarEvents == null ? '' : data.calendarEvents.exDividendDate.fmt | date: 'MMMM d, y'}}</td>
+                    <td class="left">{{ data.calendarEvents == null ? '' : data.calendarEvents.dividendDate.fmt | date: 'MMMM d, y' }}</td>
                     <td>{{ data.summaryDetail.dividendYield.fmt }}</td>
                     <td>{{ data.averageCost == '0.00' ? 0 : ((data.summaryDetail.trailingAnnualDividendRate.raw / data.averageCost) | percent : '1.0-2') }}</td>
                     <td>{{ data.summaryDetail.trailingAnnualDividendRate.raw * data.fractionalShares | currency }}</td>

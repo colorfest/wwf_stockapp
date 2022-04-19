@@ -119,33 +119,62 @@ export class StockListFullComponent implements OnInit {
     // counter
     var itemsProcessed = 0;
 
+    // interval 
+    var interval = 300;
+
+    // promise
+    var promise = Promise.resolve();
+
     // parse through each stock and get API data
     if (this.stockList) {
       this.stockList.forEach(element => {
-        this.data$ = this.yahooService.getData(element.tickerSymbol)
-        .subscribe(data => {
-          this.config = <DefaultData>data; // data from yahoo
 
-          let finalData = { ...this.config, ...element}; // combine yahoo and firebase data for full stock info
-
-          var res = [];
-          for (var x in finalData) {
-            finalData.hasOwnProperty(x) && res.push(finalData[x]);
-          }
-
-          // push to displayData array
-          this.displayData.push(finalData);
-
-          // TODO: Order the results by tickerSymbol
-
+        promise = promise.then(() => {
           itemsProcessed++;
 
-          // update loading
-          if (itemsProcessed === this.stockList.length) return this.loaderDisplay(false)
-        },
-        error => this.error = error);
+          this.data$ = this.yahooService.getData(element.tickerSymbol)
+          .subscribe(data => {
+            this.config = <DefaultData>data; // data from yahoo
+  
+            let finalData = { ...this.config, ...element}; // combine yahoo and firebase data for full stock info
+  
+            var res = [];
+            for (var x in finalData) {
+              finalData.hasOwnProperty(x) && res.push(finalData[x]);
+            }
+  
+            // push to displayData array
+            this.displayData.push(finalData);
+            console.log(this.displayData);
+  
+            // TODO: Order the results by tickerSymbol
+            function sortByTickerSymbol(a,b) {
+              if (a.tickerSymbol < b.tickerSymbol) {
+                return -1;
+              }
+
+              if (a.tickerSymbol > b.tickerSymbol) {
+                return 1;
+              }
+              return 0;
+            }
+            
+            this.displayData.sort(sortByTickerSymbol);
+
+            this.loaderDisplay(false);
+          },
+          error => this.error = error);
+
+          return new Promise(function (resolve) {
+            setTimeout(resolve, interval);
+          });
+        });
       });
     }
+
+    promise.then(function () {
+      console.warn('LOOP FINISHED');
+    })
   }
 
   /**

@@ -8,6 +8,10 @@ table {
         padding: 0.7em 0.25em;
         vertical-align: middle;
         border: none;
+        &.header {
+            position: sticky;
+            top: 0;
+        }
     }
 
     tr {
@@ -66,13 +70,20 @@ input {
 }
 
 .main-container {
-    margin-top: 5em;
+    margin-top: 0;
+    width: 100%;
+    height: 800px;
+    overflow: auto;
+    position: fixed;
 }
 
 .deleteButton {
     padding: 0.25em;
     cursor: pointer;
     display: block;
+    &:hover {
+        color: #dadada;
+    }
 }
 
 .table-dark tbody tr {

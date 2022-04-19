@@ -74,8 +74,9 @@ export class ColumnTotalsService {
 
     // loop through and average out the total growth
     data.forEach(element => {
+
       if (element.averageCost != '0.00')
-        growthTotal = growthTotal + (element.averageCost == '0.00' ? (0.00) : ( (((element.price.regularMarketPrice.raw *  element.fractionalShares) - (element.fractionalShares * element.averageCost)) / (element.fractionalShares * element.averageCost)) * 100.00));
+        growthTotal = growthTotal + (element.averageCost == '0' ? (0.00) : ( (((element.price.regularMarketPrice.raw *  element.fractionalShares) - (element.fractionalShares * element.averageCost)) / (element.fractionalShares * element.averageCost)) * 100.00));
         counter++;
     })
 

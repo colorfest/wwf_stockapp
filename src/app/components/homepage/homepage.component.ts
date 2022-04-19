@@ -51,7 +51,7 @@ export class HomepageComponent implements OnInit {
 
         // sort alphabetically
         if ( Object.keys(this.savedUserData).length > 2) {
-            this.sortData("ascending", "symbol");
+            this.sortData("descending", "symbol");
         } 
 
         // set displayData to current savedUserData
